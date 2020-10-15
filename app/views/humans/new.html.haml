@@ -1,0 +1,86 @@
+.exhibit__page
+  = form_with model: @hairdresser, local: true do |f|
+    .exhibit__page__main
+      .exhibit__page__main__contents
+        %h3.exhibit__page__main__contents__message
+          スタッフの情報を入力
+        .form-content
+          .img-form
+            %h3.img__upload__text
+              スタッフ画像
+              %span.form--caution 
+                必須
+            %p.img__upload__comment 最大5枚までアップロードできます（jpg/jpeg/png画像、上限100KBまで）
+
+            .dropbox
+              
+            #image-box
+              #previews
+                %label{for: "hairdresser_images_attributes_0_src", class: "dropbox__img"}
+                  = icon('fas', 'camera')
+                  -# %p ドラッグアンドドロップ<br>または
+                  %p クリックしてファイルをアップロード
+
+                = f.fields_for :images, @hairdresser.images.build do |image|
+                  %div.js-file_group{data: {index: image.index}}
+                    = image.file_field :src, class: "js-file"
+                
+              -# = render partial: 'error_message', locals: { column: :images }
+        .human--content
+          .human--content__profile
+            %h3.human--content
+              プロフィール
+              %span.form--caution 
+                必須
+            %div
+              = f.text_field :name,  class: "Form__textContent", placeholder:"名前（必須20文字まで）" 
+              -# = render partial: 'error_message', locals: { column: :name }
+          .human--content__introduction
+            %h3.human--content__introduction__introduction
+              自己紹介
+              %span.form--caution 
+                必須
+              = f.text_area :explain, class: "Form__textareaContent", placeholder: "自己紹介（必須1,000文字以内）"
+              -# = render partial: 'error_message', locals: { column: :explain }
+          .gender__form
+            %h3.gender__form__status
+              性別
+              %span.form--caution 必須
+              .select--wrap
+                = f.collection_select :gender_id, Gender.all, :id, :choice, {prompt: "選択してください"}, {class: "select--wrap__box"}
+          .technique__form
+            %h3.technique__form__status
+              メニュー
+              %span.form--caution 必須
+              .select--wrap
+                = f.collection_select :technique_id, Technique.all, :id, :choice, {prompt: "選択してください"}, {class: "select--wrap__box"}
+          .history__form
+            %h3.history__form__status
+              歴
+              %span.form--caution 必須
+              .select--wrap
+                = f.collection_select :history_id, History.all, :id, :choice, {prompt: "選択してください"}, {class: "select--wrap__box"}
+          .prefecture__form
+            %h3.prefecture__form__status
+              対応可能な地域
+              %span.form--caution 必須
+            .select--wrap
+              = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "選択してください"}, {class: "select--wrap__box"}
+            %h3.sell--content__name__name
+              市町村
+              %span.form--caution 
+                必須
+            %div
+              = f.text_field :area,  class: "Form__textContent", placeholder:"市町村・地区" 
+          .price__form
+            .price__form__left
+              %h3.price__form__name
+                料金
+              %span.form--caution 必須
+            .select--wrap
+              .price-field
+                %span ¥
+                = f.number_field :price, in: 1000..15000, step:1, class: "select--wrap__box"
+          .submit-button
+            .actions
+              = f.submit "登録する", class: "btn--lightblue"

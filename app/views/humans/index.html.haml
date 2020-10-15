@@ -1,0 +1,36 @@
+= render partial: 'header'
+
+.Pickup
+  %h1
+    男性美容師
+  = link_to '新規登録美容師', root_path, class: 'Pickup__link'
+  .Pickup__items
+    -# - @items.each do |item|
+    .Item-contents
+      -# = link_to item_path(id: item[:id]) do
+      .Item-link
+        -# = image_tag(item.images.first.src.url)
+        .Item-link__text
+          %p
+            鈴木 太郎
+          %p
+            1000円
+          %p (税込)
+          
+
+.Pickup.bottom
+  %h1
+    女性美容師
+  = link_to '新規登録美容師', root_path, class: 'Pickup__link'
+  .Pickup__items
+    -# - @items.each do |item|
+    .Item-contents
+      -# = link_to item_path(id: item[:id]) do
+      .Item-link
+        -# = image_tag(item.images.first.src.url)
+        .Item-link__text
+          %p
+            鈴木 花子
+          %p
+            1000円
+          %p (税込)
