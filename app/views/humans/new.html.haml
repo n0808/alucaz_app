@@ -1,5 +1,5 @@
 .exhibit__page
-  = form_with model: @hairdresser, local: true do |f|
+  = form_with model: @humans, local: true do |f|
     .exhibit__page__main
       .exhibit__page__main__contents
         %h3.exhibit__page__main__contents__message
@@ -21,47 +21,47 @@
                   -# %p ドラッグアンドドロップ<br>または
                   %p クリックしてファイルをアップロード
 
-                = f.fields_for :images, @hairdresser.images.build do |image|
+                = f.fields_for :images, @human.images.build do |image|
                   %div.js-file_group{data: {index: image.index}}
                     = image.file_field :src, class: "js-file"
                 
               -# = render partial: 'error_message', locals: { column: :images }
-        .human--content
-          .human--content__profile
-            %h3.human--content
+        .sell--content
+          .sell--content__name
+            %h3.sell--content__name__name
               プロフィール
               %span.form--caution 
                 必須
             %div
               = f.text_field :name,  class: "Form__textContent", placeholder:"名前（必須20文字まで）" 
               -# = render partial: 'error_message', locals: { column: :name }
-          .human--content__introduction
-            %h3.human--content__introduction__introduction
+          .sell--content__description
+            %h3.sell--content__description__description
               自己紹介
               %span.form--caution 
                 必須
               = f.text_area :explain, class: "Form__textareaContent", placeholder: "自己紹介（必須1,000文字以内）"
               -# = render partial: 'error_message', locals: { column: :explain }
-          .gender__form
-            %h3.gender__form__status
+          .product-details__form__status
+            %h3.product-details__form__status__name
               性別
               %span.form--caution 必須
               .select--wrap
                 = f.collection_select :gender_id, Gender.all, :id, :choice, {prompt: "選択してください"}, {class: "select--wrap__box"}
-          .technique__form
-            %h3.technique__form__status
+          .product-details__form__status
+            %h3.product-details__form__status__name
               メニュー
               %span.form--caution 必須
               .select--wrap
                 = f.collection_select :technique_id, Technique.all, :id, :choice, {prompt: "選択してください"}, {class: "select--wrap__box"}
-          .history__form
-            %h3.history__form__status
+          .product-details__form__status
+            %h3.product-details__form__status__name
               歴
               %span.form--caution 必須
               .select--wrap
                 = f.collection_select :history_id, History.all, :id, :choice, {prompt: "選択してください"}, {class: "select--wrap__box"}
-          .prefecture__form
-            %h3.prefecture__form__status
+          .delivery-form__box__middle
+            %h3.delivery-form__box__top__name
               対応可能な地域
               %span.form--caution 必須
             .select--wrap
@@ -72,9 +72,9 @@
                 必須
             %div
               = f.text_field :area,  class: "Form__textContent", placeholder:"市町村・地区" 
-          .price__form
-            .price__form__left
-              %h3.price__form__name
+          .product-price__form
+            .product-price__form__left
+              %h3.product-price__form__name
                 料金
               %span.form--caution 必須
             .select--wrap

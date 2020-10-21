@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :humans
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+  }
+  devise_scope :user do
+    get 'users', to: 'users/registrations#new'
+  end
+
   root 'humans#index'
+
+  resources :humans
 end
